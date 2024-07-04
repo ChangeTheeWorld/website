@@ -28,9 +28,8 @@ def comment_like(req, comment_id):
     print(req.POST)
     val = 0
     if "like" in req.POST:
-        val = 1
-    elif "dislike" in req.POST:
-        val = -1
+        print(req.POST["like"])
+        val = int(req.POST["like"])
 
     comm.likes += val
     comm.save()
