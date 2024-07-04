@@ -53,16 +53,16 @@
 
 <script defer>
     var increment = 0
-    
+
     $(document).on('submit', '#likeForm', function (e) {
         e.preventDefault();
         const commentId = e.target.dataset.comment
-        
-        
+
+
         $(`#likeForm[data-comment="${commentId}"] > fieldset > p.inline-block`).text(function(a, b) {
           return +b + increment
-        }) 
-        
+        })
+
         $.ajax({
             type: "POST",
             url: `/blog/commentlike/${commentId}`,
@@ -70,7 +70,7 @@
                like: increment,
                csrfmiddlewaretoken: $(`#likeForm[data-comment="${commentId}"] > input[name="csrfmiddlewaretoken"]`).val()
             },
-            
+
         })
     })
 </script>
