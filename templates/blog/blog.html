@@ -1,6 +1,7 @@
 {% load static tailwind_tags %}
 {% load humanize %}
 <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <head>
     <title>{{ post.title }} by {{ post.author|capfirst }}</title>
     <meta name="viewport"
@@ -34,11 +35,13 @@
                 	<div class="py-3 hover:bg-white/10 pl-3 rounded-2xl">
                         <p class="text-white/70">{{ comment.author }}</p>
                         <p>{{ comment.content }}</p>
-                        <form action="{% url 'comment_like' comment.id %}" method="post" class="text-xl likeForm">
+                        <form method="post" id="likeForm" class="text-xl" data-comment="{{ comment.id }}">
                             {% csrf_token %}
-                            <button type="submit" name="like" value="like">👍</button>
-                            <p class="inline-block">{{ comment.likes }}</p>
-                            <button type="submit" name="dislike" value="dislike">👎</button>
+                            <fieldset>
+                                <button type="submit" value="1" onclick="increment=1" name="like">👍</button>
+                                <p class="inline-block">{{ comment.likes }}</p>
+                                <button type="submit" name="like" onclick="increment=-1" value="-1">👎</button>
+                            </fieldset>
                         </form>
                     </div>
                 {% endfor %}
@@ -47,6 +50,30 @@
         </div>
     </div>
 </body>
+
+<script defer>
+    var increment = 0
+
+    $(document).on('submit', '#likeForm', function (e) {
+        e.preventDefault();
+        const commentId = e.target.dataset.comment
+
+
+        $(`#likeForm[data-comment="${commentId}"] > fieldset > p.inline-block`).text(function(a, b) {
+          return +b + increment
+        })
+
+        $.ajax({
+            type: "POST",
+            url: `/blog/commentlike/${commentId}`,
+            data: {
+               like: increment,
+               csrfmiddlewaretoken: $(`#likeForm[data-comment="${commentId}"] > input[name="csrfmiddlewaretoken"]`).val()
+            },
+
+        })
+    })
+</script>
 
 <style>
     md-block {
