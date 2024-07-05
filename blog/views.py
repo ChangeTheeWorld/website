@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import BlogPost, Comment
 from django.http import HttpResponseRedirect
@@ -11,7 +11,8 @@ def index(req):
 
 
 def blog(req, blog_id):
-    return render(req, "blog/blog.html", {"post": BlogPost.objects.get(id=blog_id)})
+    post = get_object_or_404(BlogPost, pk=blog_id)
+    return render(req, "blog/blog.html", {"post": post})
 
 
 def comment(req, blog_id):
