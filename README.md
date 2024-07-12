@@ -1,6 +1,12 @@
 # website
 the website for the Change The World Initiative.
 
+# required dependecies
+dependencies you'll have to install to get this project running
+
+- `django`
+- `django-tailwind`
+
 # run
 ```commandline
 python manage.py runserver localhost:8000
