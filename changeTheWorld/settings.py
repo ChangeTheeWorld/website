@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     "blog.apps.BlogConfig",
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    "home.apps.HomeConfig"
 ]
 
 TAILWIND_APP_NAME = 'theme'
