@@ -24,12 +24,9 @@
                 <p class="font-bold pb-5">comments</p>
                 <form action="{% url 'comment' post.id %}" method="post" class="sticky">
                     {% csrf_token %}
-                    <fieldset class="bg-white/5 p-3 rounded-2xl ring-2 ring-white/10 flex flex-row">
-                        <label class="max-md:w-full w-52 mr-3">
-                            <input type="text" name="comment" class="bg-white/10 rounded-full outline-none py-2 w-full px-5 shadow-sm focus:bg-white/15" placeholder="comment" required>
-                        </label>
-                        <label class="max-md:w-full w-52 mr-3">
-                            <input type="text" name="author" placeholder="username" class="bg-white/10 rounded-full w-full outline-none py-2 px-5 shadow-sm focus:bg-white/15">
+                    <fieldset class="bg-white/5 p-3 rounded-2xl ring-2 ring-white/10">
+                        <label class="">
+                            <input type="text" name="comment" class="bg-white/10 rounded-full outline-none py-2 px-5 shadow-sm focus:bg-white/15" placeholder="comment" required>
                         </label>
                         <button value="comment" type="submit" class="bg-sky-500 p-2 rounded-full px-3 hover:bg-sky-400">submit</button>
                     </fieldset>
@@ -38,13 +35,45 @@
                 	<div class="py-3 hover:bg-white/10 pl-3 rounded-2xl">
                         <p class="text-white/70">{{ comment.author }}</p>
                         <p>{{ comment.content }}</p>
-                   </div>
+                        <form method="post" id="likeForm" class="text-xl" data-comment="{{ comment.id }}">
+                            {% csrf_token %}
+                            <fieldset>
+                                <button type="submit" value="1" onclick="increment=1" name="like">👍</button>
+                                <p class="inline-block">{{ comment.likes }}</p>
+                                <button type="submit" name="like" onclick="increment=-1" value="-1">👎</button>
+                            </fieldset>
+                        </form>
+                    </div>
                 {% endfor %}
-
+                
             </div>
         </div>
     </div>
 </body>
+
+<script defer>
+    var increment = 0
+
+    $(document).on('submit', '#likeForm', function (e) {
+        e.preventDefault();
+        const commentId = e.target.dataset.comment
+
+
+        $(`#likeForm[data-comment="${commentId}"] > fieldset > p.inline-block`).text(function(a, b) {
+          return +b + increment
+        })
+
+        $.ajax({
+            type: "POST",
+            url: `/blog/commentlike/${commentId}`,
+            data: {
+               like: increment,
+               csrfmiddlewaretoken: $(`#likeForm[data-comment="${commentId}"] > input[name="csrfmiddlewaretoken"]`).val()
+            },
+
+        })
+    })
+</script>
 
 <style>
     md-block {
