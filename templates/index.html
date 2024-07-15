@@ -1,5 +1,11 @@
+{% load tailwind_tags %}
 
-
+<head>
+    {% tailwind_css %}
+    <title>The Change The World</title>
+</head>
+<body class="bg-black text-white">
     <h1>welcome to our website!</h1>
     <p>todo: finish this page</p>
     <a href="{% url 'index' %}">to the blog page</a>
+</body>

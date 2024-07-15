@@ -1,25 +1,40 @@
-from django.shortcuts import render, get_object_or_404
-
-from .models import BlogPost, Comment
+from django.views import generic
+from .models import BlogPost
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-
-# Create your views here.
-def index(req):
-    """
-    the view for the url /blog, shows the list of blogposts
-    """
-    content = {"posts": BlogPost.objects.all()}
-    return render(req, "blog/index.html", content)
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import BlogPostSerializer
 
 
-def blog(req, blog_id):
-    """
-    the page for the blogpost
-    """
-    post = get_object_or_404(BlogPost, pk=blog_id)
-    return render(req, "blog/blog.html", {"post": post})
+class IndexView(generic.ListView):
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        """fetches all posts"""
+        return BlogPost.objects.order_by('-date_posted')
+
+
+class BlogView(generic.DetailView):
+    model = BlogPost
+    template_name = 'blog/blog.html'
+    context_object_name = 'post'
+
+
+@api_view(['GET'])
+def blog_endpoint(req, blog_id=None):
+    print(blog_id)
+    if blog_id is None:
+        blogpost = BlogPost.objects.order_by('-pk')[0]
+        serializer = BlogPostSerializer(blogpost)
+        return Response(serializer.data)
+
+    blogpost = BlogPost.objects.get(pk=blog_id)
+    serializer = BlogPostSerializer(blogpost)
+    return Response(serializer.data)
 
 
 def comment(req, blog_id):

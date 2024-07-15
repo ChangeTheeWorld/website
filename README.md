@@ -6,6 +6,7 @@ dependencies you'll have to install to get this project running
 
 - `django`
 - `django-tailwind`
+- `djangorestframework`
 
 # run
 ```commandline
