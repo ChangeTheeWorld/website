@@ -2,10 +2,28 @@
 
 <head>
     {% tailwind_css %}
-    <title>The Change The World</title>
+    <title>The Change The World Initiative</title>
 </head>
 <body class="bg-black text-white">
-    <h1>welcome to our website!</h1>
-    <p>todo: finish this page</p>
-    <a href="{% url 'index' %}">to the blog page</a>
+    <section id="home" class="w-screen h-screen flex flex-col">
+        <div class="w-full h-full grid place-items-center">
+            <div class="">
+                <p class="font-bold text-7xl bg-clip-text text-transparent bg-gradient-to-t from-gray-100 to-70% to-slate-800 py-10 text-center">Let's change the world together.</p>
+{#                TODO: change to something#}
+                <p class="text-center text-gray-300">cuz why not lmao I have no idea what to put here, and I am to lazy to put a lorem ipsum so read through that</p>
+                <div class="grid place-items-center w-full h-min">
+                  <div class="flex flex-row w-min justify-items-center items-center gap-3 mt-5">
+                      <a href="https://github.com/ChangeTheeWorld" class="bg-sky-500 px-5 py-2 shadow-md rounded-lg hover:bg-sky-400">GitHub</a>
+                      <a href="{% url 'index' %}" class="bg-sky-500 px-5 py-2 shadow-md rounded-lg hover:bg-sky-400">Blog</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-min bg-slate-900 p-3">
+            <p>Team</p>
+{#            TODO: add the team#}
+            <p>TODO: add the team lol</p>
+
+        </div>
+    </section>
 </body>
