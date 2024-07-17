@@ -10,6 +10,9 @@ from .serializers import BlogPostSerializer
 
 
 class IndexView(generic.ListView):
+    """
+    the "browse page" for blog posts (should I rename it to that???)
+    """
     template_name = 'blog/index.html'
     context_object_name = 'posts'
 
@@ -19,6 +22,9 @@ class IndexView(generic.ListView):
 
 
 class BlogView(generic.DetailView):
+    """
+    the view that displays a blog post
+    """
     model = BlogPost
     template_name = 'blog/blog.html'
     context_object_name = 'post'
@@ -26,9 +32,12 @@ class BlogView(generic.DetailView):
 
 @api_view(['GET'])
 def blog_endpoint(req, blog_id=None):
+    """
+    the endpoint to blog posts, duh
+    """
     print(blog_id)
     if blog_id is None:
-        blogpost = BlogPost.objects.order_by('-pk')[0]
+        blogpost = BlogPost.objects.last()
         serializer = BlogPostSerializer(blogpost)
         return Response(serializer.data)
 
