@@ -1,0 +1,21 @@
+{% load tailwind_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% tailwind_css %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    {% block title %}
+        <title>Title</title>
+    {% endblock %}
+</head>
+<body>
+    <div class="fixed p-3 top-0 w-screen h-min flex flex-row bg-black max-md:justify-center">
+        <a href="{% url 'home' %}" class="layout-link">Change The World</a>
+        <a href="{% url 'index' %}" class="layout-link">Blog</a>
+    </div>
+    {% block content %}
+    	<p>hello</p>
+    {% endblock %}
+</body>
+</html>

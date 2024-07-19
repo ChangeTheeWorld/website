@@ -1,22 +1,22 @@
+{% extends 'layout.html' %}
 {% load static tailwind_tags %}
 {% load humanize %}
-<script type="module" src="https://md-block.verou.me/md-block.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<head>
-    <title>{{ post.title }} by {{ post.author|capfirst }}</title>
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    {% tailwind_css %}
-</head>
+{% block title %}
+	<title>{{ post.title }} by {{ post.author|capfirst }}</title>
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<body class="bg-black text-white">
-    <div class="flex justify-center md:pt-5">
+{% endblock %}
+
+{% block content %}
+	<body class="bg-black text-white ">
+    <div class="flex justify-center md:pt-5 max-md:pt-10">
         <div class="w-[80ch]  min-h-screen">
             <div class="min-h-[70vh]">
                 <p class="md:text-9xl text-5xl text-center mt-10 font-semibold">{{ post.title }}</p>
                 <p class="md:text-3xl pl-10 pt-3 pb-5 text-white/70">by {{ post.author|capfirst }}, {{ post.date_posted|naturalday }}</p>
                 <md-block>
-                        {{ post.content }}
+                    {{ post.content }}
                 </md-block>
             </div>
 
@@ -66,3 +66,4 @@
         }
     }
 </style>
+{% endblock %}
