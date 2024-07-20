@@ -3,7 +3,7 @@ from .models import BlogPost
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from rest_framework import status
+# from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import BlogPostSerializer
