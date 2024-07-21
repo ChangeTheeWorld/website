@@ -5,3 +5,13 @@
 .layout-link {
     @apply p-2 px-4 rounded-lg transition-all duration-100 active:scale-90 font-semibold hover:font-bold hover:scale-105 hover:bg-white/20 md:mx-5
 }
+
+.reaction, .react-btn {
+    @apply inline-block w-max p-1 px-3 rounded-lg hover:bg-white/25 hover:ring-white/35 hover:ring-2 transition-all duration-75 text-xl
+}
+.react-btn {
+    @apply bg-white/20 ring-1 ring-white/30 font-semibold grayscale
+}
+.reaction {
+    @apply bg-white/15
+}
