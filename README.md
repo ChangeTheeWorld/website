@@ -1,4 +1,4 @@
-# website
+# The Website
 the website for the Change The World Initiative.
 
 # required dependecies
