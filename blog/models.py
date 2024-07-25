@@ -14,10 +14,10 @@ class BlogPost(models.Model):
         return self.title
 
 
-class Reaction(models.Model):
+class Comment(models.Model):
     blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
-    reaction = models.CharField(max_length=1)
-    amount = models.IntegerField(default=1)
+    author = models.CharField(max_length=200, default="unknown")
+    content = models.TextField()
 
     def __str__(self):
-        return f"{self.reaction} {self.amount}"
+        return self.content
