@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}
+    <title>the progress</title>
+{% endblock %}
+
+{% block content %}
+    <body class="bg-black text-white">
+    <div class="mt-20">
+        <p class="text-5xl pl-3 pt-3 font-bold">Progress</p>
+        <div class="grid [grid-template-columns:_repeat(auto-fill,_minmax(15rem,_1fr));] gap-3 p-3">
+            {% for repo in repos %}
+                <div class="w-full bg-white/15 p-3 py-5 rounded-xl">
+                    <p>{{ repo.name }}</p>
+                    <p></p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    </body>
+{% endblock %}

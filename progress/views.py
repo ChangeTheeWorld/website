@@ -1,6 +1,5 @@
-import requests
-import json
 from django.shortcuts import render
+import requests
 
 from changeTheWorld import settings
 
@@ -8,11 +7,11 @@ from changeTheWorld import settings
 # Create your views here.
 
 
-def home(request):
-    members = requests.get("https://api.github.com/orgs/changetheeworld/members", headers={
+def index(request):
+    repos = requests.get("https://api.github.com/orgs/changetheeworld/repos", headers={
         "Accept": "application/vnd.github.v3+json",
         "Authorization": "Bearer " + settings.GITHUB_TOKEN,
         "X-GitHub-Api-Version": "2022-11-28"
     })
-
-    return render(request, 'index.html', {'members': members.json()})
+    print(repos.json())
+    return render(request, 'progress/index.html', context={'repos': repos.json()})

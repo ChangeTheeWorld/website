@@ -5,3 +5,7 @@
 .layout-link {
     @apply p-2 px-4 rounded-lg transition-all duration-100 active:scale-90 font-semibold hover:font-bold hover:scale-105 hover:bg-white/20 md:mx-5
 }
+
+.home-button {
+    @apply px-5 py-2 shadow-md rounded-lg bg-gradient-to-br from-cyan-500 via-sky-500 to-cyan-700 hover:from-cyan-400 hover:via-sky-400 hover:to-cyan-600
+}

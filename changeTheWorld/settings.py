@@ -47,9 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'home.apps.HomeConfig',
     'rest_framework',
+    "progress.apps.ProgressConfig"
 ]
 
 TAILWIND_APP_NAME = 'theme'
+
+GITHUB_TOKEN = "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"
 
 INTERNAL_IPS = [
     "127.0.0.1",
